@@ -2,7 +2,7 @@ import { MongoClient } from "mongo";
 import { config } from "dotenv";
 import { TransactionSchema, UserSchema } from "./schemas.ts";
 const env = config();
-if (env.MONGO_USER || !env.MONGO_PWD) {
+if (!env.MONGO_USER || !env.MONGO_PWD) {
     console.error("You need to define MONGO_USER and MONGO_PWD env variable")
 }
 const client = new MongoClient();

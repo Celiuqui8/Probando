@@ -9,11 +9,11 @@ type DeleteUserContext = RouterContext<"/deleteUser/:email", {
 
 export const deleteUser = async (context: DeleteUserContext) => {
     try {
-        //const email = context.params?.email;
         let arg;
-        if (new RegExp("^[\w-.]+@([\w-]+.)+[\w-]{2,4}$").test(context.params?.email)) {
-            arg = {email: context.params?.param }
+        if (new RegExp("^[a-z0-9!#$%&'+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'+/=?^_`{|}~-]+)@(?:[a-z0-9](?:[a-z0-9-][a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$").test(context.params?.email)) {
+            arg = {Email: context.params?.email }
             await UserCollection.deleteOne(arg);
+            context.response.status = 200;
         } else {
             context.response.status = 404;
             context.response.body = {
